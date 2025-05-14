@@ -6,13 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
 {
-
-    // public function authorize(): bool
-    // {
-    //     return false;
-    // }
-
-
     public function rules(): array
     {
         return [
@@ -41,5 +34,5 @@ class StoreRequest extends FormRequest
     {
         return $this->validated('email');
     }
-    
+
 }

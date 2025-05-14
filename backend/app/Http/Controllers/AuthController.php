@@ -18,10 +18,10 @@ class AuthController extends Controller
         if (!Auth::attempt($credentials)) {
             return response()->json(['message' => 'Credenciais inválidas'], 401);
         }
-    
+
         $user = $request->user();
         $token = $user->createToken('personal-token')->plainTextToken;
-    
+
         return response()->json([
             'token' => $token,
             'user' => $user,

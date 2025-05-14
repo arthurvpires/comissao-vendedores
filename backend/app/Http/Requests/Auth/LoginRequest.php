@@ -6,7 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
-
     public function rules(): array
     {
         return [
@@ -33,6 +32,6 @@ class LoginRequest extends FormRequest
     {
         return $this->validated('password');
     }
-    
+
 
 }

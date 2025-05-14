@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Mail;
+
 use Illuminate\Mail\Mailable;
 
 class SalesOfTheDayToAdminMail extends Mailable
 {
-    public function __construct(public int $sales) {}
+    public function __construct(public int $sales)
+    {
+    }
 
     public function build()
     {

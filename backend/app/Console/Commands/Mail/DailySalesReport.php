@@ -14,8 +14,9 @@ class DailySalesReport extends Command
     protected $signature = 'mail:daily-sales-report';
     protected $description = 'Envia e-mails de resumo diário aos vendedores';
     private SaleRepository $saleRepository;
- 
-    public function __construct(SaleRepository $saleRepository) {
+
+    public function __construct(SaleRepository $saleRepository)
+    {
         parent::__construct();
         $this->saleRepository = $saleRepository;
     }
@@ -32,7 +33,7 @@ class DailySalesReport extends Command
             $sales = $this->saleRepository->getSalesBySellerAndDate($seller, today());
             sleep(2);
 
-            try{
+            try {
                 Mail::to($seller->email)->send(new DailySalesReportMail(
                     $seller->name,
                     $sales['quantity'],
@@ -45,7 +46,7 @@ class DailySalesReport extends Command
                 $this->error("Erro ao enviar e-mail para o vendedor {$seller->name}: {$e->getMessage()}");
             }
         }
-    
+
     }
-    
+
 }

@@ -29,4 +29,3 @@ class EmailController extends Controller
         return response()->json(['message' => 'E-mail reenviado com sucesso.'], 200);
     }
 }
-

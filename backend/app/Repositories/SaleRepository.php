@@ -8,7 +8,6 @@ use App\Models\Seller;
 
 class SaleRepository
 {
-
     public function findOneById(int $id): Sale
     {
         return Sale::findOrFail($id);

@@ -1,16 +1,14 @@
 <?php
 
 namespace App\Mail;
+
 use Illuminate\Mail\Mailable;
 
 class DailySalesReportMail extends Mailable
 {
-    public function __construct(
-        public string $sellerName,
-        public int $quantity,
-        public int $total,
-        public int $commission
-    ) {}
+    public function __construct(public string $sellerName, public int $quantity, public int $total, public int $commission)
+    {
+    }
 
     public function build()
     {

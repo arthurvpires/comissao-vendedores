@@ -42,6 +42,6 @@ class StoreRequest extends FormRequest
     {
         return $this->validated('date');
     }
-    
+
 
 }

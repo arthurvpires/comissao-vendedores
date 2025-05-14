@@ -46,6 +46,6 @@ class RegisterRequest extends FormRequest
     {
         return $this->validated('password');
     }
-    
+
 
 }
