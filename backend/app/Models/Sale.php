@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\Seller;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Sale extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'seller_id',
+        'value',
+        'commission',
+    ];
+    
+    public function seller(): BelongsTo
+    {
+        return $this->belongsTo(Seller::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function ($sale) {
+            $sale->commission = $sale->getCommissionAttribute();
+        });
+    }
+
+    public function getCommissionAttribute(): int
+    {
+        return round($this->value * 0.085);
+    }
+
+}
