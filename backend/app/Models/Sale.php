@@ -25,13 +25,13 @@ class Sale extends Model
     {
         parent::boot();
         static::creating(function ($sale) {
-            $sale->commission = $sale->getCommissionAttribute();
+            $sale->commission = self::getCommissionAttribute($sale->value);
         });
     }
 
-    public function getCommissionAttribute(): int
+    public static function getCommissionAttribute(int $value): int
     {
-        return round($this->value * 0.085);
+        return round($value * 0.085);
     }
 
 }
