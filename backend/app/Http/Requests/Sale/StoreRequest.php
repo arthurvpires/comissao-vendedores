@@ -33,7 +33,7 @@ class StoreRequest extends FormRequest
         return $this->validated('seller_id');
     }
 
-    public function value(): int
+    public function value(): float
     {
         return $this->validated('value');
     }

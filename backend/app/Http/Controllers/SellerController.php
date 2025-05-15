@@ -19,7 +19,7 @@ class SellerController extends Controller
 
     public function index()
     {
-        return response()->json(Seller::all(), 200);
+        return response()->json(Seller::all()->toArray(), 200);
     }
 
     public function salesBySeller(int $id)

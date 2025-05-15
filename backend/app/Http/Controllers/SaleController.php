@@ -11,7 +11,7 @@ class SaleController extends Controller
     {
         $sale = Sale::create([
             'seller_id' => $request->sellerId(),
-            'value' => $request->value(),
+            'value' => $request->value() * 100,
             'date' => $request->getDate(),
         ]);
 
@@ -20,7 +20,7 @@ class SaleController extends Controller
 
     public function index()
     {
-        return response()->json(Sale::all(), 200);
+        return response()->json(Sale::with('seller')->get()->toArray(), 200);
     }
 
 }
