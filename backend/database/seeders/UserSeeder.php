@@ -12,7 +12,11 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
+            'is_admin' => true,
             'password' => "12345678",
         ]);
+
+        User::factory()->count(5)->create();
+
     }
 }

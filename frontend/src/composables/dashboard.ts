@@ -23,7 +23,7 @@ export function useDashboard() {
     const isLoading = ref(false);
     const successMessage = ref('');
     const errorMessage = ref('');
-    const userEmail = ref('');
+    const userIsAdmin = ref(false);
 
     const sellers = ref<any[]>([]);
     const sales = ref<any[]>([]);
@@ -53,7 +53,7 @@ export function useDashboard() {
         showErrorModal.value = true;
     };
 
-    const fetchUserEmail = async () => {
+    const fetchUserIsAdmin = async () => {
         const token = localStorage.getItem('token');
         if (!token) {
             router.push('/login');
@@ -68,7 +68,7 @@ export function useDashboard() {
                 },
                 withCredentials: true,
             });
-            userEmail.value = response.data.email || '';
+            userIsAdmin.value = response.data.is_admin || false;
         } catch (error: any) {
             if (error.response?.status === 401) {
                 localStorage.removeItem('token');
@@ -83,7 +83,7 @@ export function useDashboard() {
     };
 
     onMounted(() => {
-        fetchUserEmail();
+        fetchUserIsAdmin();
     });
 
     const logout = async () => {
@@ -305,7 +305,7 @@ export function useDashboard() {
         isLoading,
         successMessage,
         errorMessage,
-        userEmail,
+        userIsAdmin,
         sellers,
         sales,
         selectedSellerId,
