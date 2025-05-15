@@ -16,7 +16,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/create/seller', 'store');
         Route::get('/sellers', 'index');
         Route::get('/seller/{id}/sales', 'salesBySeller');
-        Route::post('/seller/{id}/resend-daily-report-email', 'resendDailyReportEmail');
     });
 
     Route::controller(SaleController::class)->group(function () {
