@@ -15,7 +15,7 @@ class SaleFactory extends Factory
         return [
             'seller_id' => Seller::inRandomOrder()->first()->id,
             'value' => $value,
-            'commission' => Sale::getCommissionAttribute($value),
+            'commission' => Sale::setCommission($value),
             'date' => $this->faker->date(),
         ];
     }
