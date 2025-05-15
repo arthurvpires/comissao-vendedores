@@ -114,7 +114,7 @@ Para executar os testes criados:
 - EmailControllerTest
   
 ```
-php artisan test 
+docker exec -it comissao-vendedores php artisan test 
 ```
 
 ## Teste da API com Postman ou Insomnia
