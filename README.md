@@ -69,14 +69,19 @@ docker exec -it comissao-vendedores php artisan migrate
 docker exec -it comissao-vendedores php artisan db:seed
 docker exec -it comissao-vendedores php artisan key:generate
 ```
-## Envio de emails
-  - Usei o **Mailtrap** para fazer o teste de envio dos emails
-  - Crie uma conta em https://mailtrap.io e configure no **.env** para visualizar os emails recebidos. (Opcional)
+## Envio de emails (Opcional)
+  - Usei o **Mailtrap** para fazer o teste de envio dos emails.
+  - Crie uma conta em https://mailtrap.io e configure no **.env** para visualizar os emails recebidos. 
     
     ```
     MAIL_USERNAME=seu_username
     MAIL_PASSWORD=sua_senha
     ```
+ - Os e-mails são enviados de forma assíncrona usando filas. Para que eles sejam processados corretamente, é necessário iniciar o worker com o comando abaixo:
+
+   ```
+   docker exec -it comissao-vendedores php artisan queue:work
+   ````
 
 ## Configuração do Hosts:
 
