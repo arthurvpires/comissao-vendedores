@@ -31,7 +31,7 @@ Sistema web completo para cadastro e gerenciamento de vendas, com controle de co
 realizadas no dia, o valor total delas e o valor total das comissões.
 - Envia um e-mail para o administrador do sistema contendo todas a soma de todas as
 vendas efetuadas no dia;
-- Permite que o administrador reenvie o e-mail de comissão a um determinado
+- Permite que **o administrador** reenvie o e-mail de comissão a um determinado
 vendedor.
 
 ## Pré-requisitos
@@ -111,6 +111,13 @@ Para executar os testes criados:
 ```
 php artisan test 
 ```
+
+## Teste da API com Postman ou Insomnia
+
+ - **[Baixar Collection](https://drive.google.com/file/d/1o6o4-WhPX1suYZOcqbKRCe7NDDG_ABOO/view?usp=sharing)**
+   
+
+
 # Agora configurando o frontend:
 
 ```bash
@@ -136,5 +143,8 @@ npm run dev
   - `/register`
     - Cadastro de novo usuário
   - `/dashboard`
-     -  Tela principal com os endpoints da API  
+     -  Tela principal com os endpoints da API
+  
+
+   
    
