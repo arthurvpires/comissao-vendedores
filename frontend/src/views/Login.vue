@@ -3,7 +3,6 @@
     <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
       <h2 class="text-2xl text-black font-semibold text-center mb-6">Login</h2>
       <form @submit.prevent="login">
-
         <div class="mb-4">
           <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
           <input id="email" type="email" v-model="email"
@@ -25,17 +24,29 @@
 
         <p v-if="error" class="text-red-500 text-sm mt-2">{{ error }}</p>
       </form>
+
+      <div class="mt-4 text-center">
+        <button @click="$router.push('/register')"
+          class="w-full bg-blue-100 text-blue-700 py-2 px-4 rounded-md hover:bg-blue-200 transition duration-200">
+          Fazer Cadastro
+        </button>
+      </div>
+
+      <Loading :is-visible="isLoading" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-
 import { defineComponent } from 'vue';
 import { useLogin } from '@/composables/login';
+import Loading from '@/components/Loading.vue';
 
 export default defineComponent({
   name: 'Login',
+  components: {
+    Loading,
+  },
   setup() {
     return {
       ...useLogin(),

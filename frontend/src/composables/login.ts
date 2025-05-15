@@ -6,23 +6,27 @@ export function useLogin() {
     const email = ref('');
     const password = ref('');
     const error = ref('');
+    const isLoading = ref(false);
     const router = useRouter();
 
     const login = async () => {
+        isLoading.value = true;
         try {
             error.value = '';
-
             const response = await axios.post('http://comissao-vendedores.local/api/login', {
                 email: email.value,
                 password: password.value,
             }, { withCredentials: true });
-
-            const token = response.data.token;
-            localStorage.setItem('token', token);
-
+            localStorage.setItem('token', response.data.token);
             router.push('/dashboard');
         } catch (err: any) {
-            error.value = 'Credenciais inválidas';
+            if (err.response?.status === 401) {
+                error.value = 'Email ou senha incorretos';
+            } else {
+                error.value = 'Erro ao fazer login: ' + (err.response?.data?.message || 'Falha na conexão com o servidor');
+            }
+        } finally {
+            isLoading.value = false;
         }
     };
 
@@ -31,5 +35,6 @@ export function useLogin() {
         password,
         login,
         error,
+        isLoading,
     };
 }
