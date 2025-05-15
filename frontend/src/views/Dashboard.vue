@@ -71,7 +71,8 @@
                                 <th class="py-2 px-4 text-center font-bold text-black">Nome</th>
                                 <th class="py-2 px-4 text-center font-bold text-black">E-mail</th>
                                 <th class="py-2 px-4 text-center font-bold text-black">Data de Cadastro</th>
-                                <th class="py-2 px-4 text-center font-bold text-black">Reenviar email de comissão</th>
+                                <th v-if="userEmail === 'admin@admin.com'"
+                                    class="py-2 px-4 text-center font-bold text-black">Reenviar email de comissão</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -82,7 +83,8 @@
                                 <td class="py-2 px-4 border border-gray-300 text-left text-black">{{
                                     new Date(seller.created_at).toLocaleString('pt-BR') }}
                                 </td>
-                                <td class="py-2 px-4 border border-gray-300 text-center text-black">
+                                <td v-if="userEmail === 'admin@admin.com'"
+                                    class="py-2 px-4 border border-gray-300 text-center text-black">
                                     <button @click="resendCommissionEmail(seller.id)"
                                         class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600 focus:outline-none">
                                         Reenviar

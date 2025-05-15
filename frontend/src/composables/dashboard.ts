@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import router from '@/router';
 
@@ -23,6 +23,7 @@ export function useDashboard() {
     const isLoading = ref(false);
     const successMessage = ref('');
     const errorMessage = ref('');
+    const userEmail = ref('');
 
     const sellers = ref<any[]>([]);
     const sales = ref<any[]>([]);
@@ -51,6 +52,39 @@ export function useDashboard() {
         errorMessage.value = message;
         showErrorModal.value = true;
     };
+
+    const fetchUserEmail = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            router.push('/login');
+            return;
+        }
+
+        isLoading.value = true;
+        try {
+            const response = await axios.get('http://comissao-vendedores.local/api/user', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                withCredentials: true,
+            });
+            userEmail.value = response.data.email || '';
+        } catch (error: any) {
+            if (error.response?.status === 401) {
+                localStorage.removeItem('token');
+                router.push('/login');
+                showError('Sessão expirada. Por favor, faça login novamente.');
+            } else {
+                showError('Erro ao carregar dados do usuário: ' + (error.response?.data?.message || 'Falha na conexão com o servidor'));
+            }
+        } finally {
+            isLoading.value = false;
+        }
+    };
+
+    onMounted(() => {
+        fetchUserEmail();
+    });
 
     const logout = async () => {
         isLoading.value = true;
@@ -271,6 +305,7 @@ export function useDashboard() {
         isLoading,
         successMessage,
         errorMessage,
+        userEmail,
         sellers,
         sales,
         selectedSellerId,
