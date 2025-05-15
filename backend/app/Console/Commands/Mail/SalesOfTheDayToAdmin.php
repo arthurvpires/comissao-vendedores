@@ -28,10 +28,9 @@ class SalesOfTheDayToAdmin extends Command
     public function handle()
     {
         $sales = $this->saleRepository->getSalesByDate(today());
-        sleep(2);
 
         try {
-            Mail::to(env('ADMIN_EMAIL'))->send(new SalesOfTheDayToAdminMail($sales));
+            Mail::to(env('ADMIN_EMAIL'))->queue(new SalesOfTheDayToAdminMail($sales));
             $this->info('E-mail enviado para o administrador');
         } catch (\Exception $e) {
             $this->error("Erro ao enviar e-mail para o administrador: {$e->getMessage()}");

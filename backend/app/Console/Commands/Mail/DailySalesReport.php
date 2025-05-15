@@ -28,25 +28,29 @@ class DailySalesReport extends Command
 
     public function handle()
     {
-        foreach (Seller::all() as $seller) {
+        $sellers = Seller::all();
+        $this->output->progressStart($sellers->count());
+
+        foreach ($sellers as $seller) {
 
             $sales = $this->saleRepository->getSalesBySellerAndDate($seller, today());
             sleep(2);
 
             try {
-                Mail::to($seller->email)->send(new DailySalesReportMail(
+                Mail::to($seller->email)->queue(new DailySalesReportMail(
                     $seller->name,
                     $sales['quantity'],
                     $sales['total'],
                     $sales['commission']
                 ));
-
-                $this->info('E-mail enviado para o vendedor(a) ' . $seller->name);
             } catch (\Exception $e) {
                 $this->error("Erro ao enviar e-mail para o vendedor {$seller->name}: {$e->getMessage()}");
             }
+
+            $this->output->progressAdvance();
         }
 
+        $this->output->progressFinish();
+        $this->info("\nTodos os e-mails foram processados!");
     }
-
 }

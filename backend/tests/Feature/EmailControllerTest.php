@@ -47,7 +47,7 @@ class EmailControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJson(['message' => 'E-mail reenviado com sucesso.']);
 
-        Mail::assertSent(DailySalesReportMail::class, function ($mail) use ($seller) {
+        Mail::assertQueued(DailySalesReportMail::class, function ($mail) use ($seller) {
             return $mail->hasTo($seller->email);
         });
     }

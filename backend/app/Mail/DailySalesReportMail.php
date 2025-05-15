@@ -3,8 +3,9 @@
 namespace App\Mail;
 
 use Illuminate\Mail\Mailable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class DailySalesReportMail extends Mailable
+class DailySalesReportMail extends Mailable implements ShouldQueue
 {
     public function __construct(public string $sellerName, public int $quantity, public int $total, public int $commission)
     {
