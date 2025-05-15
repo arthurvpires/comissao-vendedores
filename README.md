@@ -44,7 +44,7 @@ vendedor.
 Clone este repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/comissao-vendedores.git
+git clone https://github.com/arthurvpires/comissao-vendedores.git
 cd comissao-vendedores
 ```
 # Configurando o Backend (Laravel + Docker)
