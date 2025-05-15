@@ -12,6 +12,7 @@ return new class () extends Migration {
             $table->foreignId('seller_id')->constrained()->onDelete('cascade');
             $table->integer('value');
             $table->integer('commission')->default(0);
+            $table->date('date');
             $table->timestamps();
         });
     }

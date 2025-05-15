@@ -13,6 +13,7 @@ class Sale extends Model
         'seller_id',
         'value',
         'commission',
+        'date'
     ];
 
     public function seller(): BelongsTo
@@ -24,11 +25,11 @@ class Sale extends Model
     {
         parent::boot();
         static::creating(function ($sale) {
-            $sale->commission = self::getCommissionAttribute($sale->value);
+            $sale->commission = self::setCommission($sale->value);
         });
     }
 
-    public static function getCommissionAttribute(int $value): int
+    protected static function setCommission(int $value): int
     {
         return round($value * 0.085);
     }

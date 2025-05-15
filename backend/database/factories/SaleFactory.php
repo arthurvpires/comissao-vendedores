@@ -16,6 +16,7 @@ class SaleFactory extends Factory
             'seller_id' => Seller::inRandomOrder()->first()->id,
             'value' => $value,
             'commission' => Sale::getCommissionAttribute($value),
+            'date' => $this->faker->date(),
         ];
     }
 }
